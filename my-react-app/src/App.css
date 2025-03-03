@@ -1,0 +1,36 @@
+/* src/App.css */
+
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.scenario-container {
+  background-color: #f4f4f4;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #ffcc00;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+li:hover {
+  transform: scale(1.05);
+}
