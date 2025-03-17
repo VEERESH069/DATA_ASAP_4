@@ -1,7 +1,15 @@
 import React from "react";
 import Scenario from "./components/scenario";
 import './App.css'
+import Login from './Login';
 
+const App = () => {
+  return (
+    <div className="App">
+      <Login />
+    </div>
+  );
+}
 const App = () =>{
   const scenario = "You're stuck in a room with an angry llama. How do you escape?";
   const options = ["A) Try to reason with the llama.",
