@@ -1,7 +1,7 @@
 import React from "react";
 import Scenario from "./components/scenario";
 import './App.css'
-import Login from './Login';
+import Login from './login';
 
 const App = () => {
   return (
