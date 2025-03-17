@@ -1,57 +1,52 @@
 // Login.js
-import React, { useState } from "react";
-import './Login.css';  // (Optional) You can add your styles here for the login page
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    
-    // Simple validation
-    if (!username || !password) {
-      setError("Both fields are required.");
-      return;
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        email,
+        password,
+      });
+
+      localStorage.setItem('token', response.data.token); // Store the token (optional)
+
+      console.log('Login successful:', response.data);
+    } catch (err) {
+      setError('Invalid credentials');
+      console.error('Login failed:', err);
     }
-
-    // For now, just log the credentials (In a real app, you'd send this to an API)
-    console.log("Logging in with:", { username, password });
-
-    // Reset form fields
-    setUsername("");
-    setPassword("");
-    setError("");  // Clear error if validation passes
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <label htmlFor="username">Username</label>
+    <div>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Email</label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your username"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
-        <div className="input-container">
-          <label htmlFor="password">Password</label>
+        <div>
+          <label>Password</label>
           <input
             type="password"
-            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
             required
           />
         </div>
+        {error && <p>{error}</p>}
         <button type="submit">Login</button>
       </form>
     </div>
